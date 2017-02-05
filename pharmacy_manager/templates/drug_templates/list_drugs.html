@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+
+{%block content %}
+{% load thumbnail %}
+<style type="text/css">
+    .bs-table{
+    	margin: 20px;
+    }
+</style>
+<div class="bs-table">
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>Name</th>
+                <th>Code</th>
+                <th>Exp Date</th>
+                <th>Manufacturer</th>
+                <th>Description</th>
+                <th>Thumb Nail</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for drug in drugs %}
+                <tr>
+                    <td>{{ drug.drug_name }}</td>
+                    <td>{{ drug.code }}</td>
+                    <td>{{ drug.exp_date }}</td>
+                    <td>{{ drug.manufacturer }}</td>
+                    <td>{{ drug.description }}</td>
+                    <td><img src="{{ drug.thumb_nail|thumbnail_url:'avatar'}}"
+                     alt="Generic placeholder image"/></td>
+                    <td><a href="{% url 'update_drug' pk=drug.id %}"> Update Drug</a>
+                        <a href="{% url 'remove_drug' pk=drug.id %}"> Delete Drug</a>
+                    </td>
+
+                </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+</div>
+{% endblock content %}

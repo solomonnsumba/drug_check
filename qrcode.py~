@@ -1,0 +1,8 @@
+import qrcode 
+def generate_qrcode(self):
+        qr = qrcode.QRCode(version=20, error_correction=qrcode.constants.ERROR_CORRECT_H)
+        qr.add_data("12345")
+        qr.make()
+        image = qr.make_image()
+        image.save("12345.png")
+        

@@ -1,0 +1,27 @@
+"""pharmacy_serve URL Configuration
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/1.8/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
+Including another URLconf
+    1. Add an import:  from blog import urls as blog_urls
+    2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
+"""
+from django.conf.urls import include, url
+from django.contrib import admin
+from pharmacy_manager import pharmacy_manager_urls
+from pharmacy_serve import settings
+from pharmacy_service import pharmacy_service_urls
+from django.conf.urls.static import static
+
+urlpatterns = [url(r'^admin/', include(admin.site.urls)),
+               url(r'^api/', include(pharmacy_service_urls)),
+               url(r'^pharmacy_manager/', include(pharmacy_manager_urls)),
+              ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
+                + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
